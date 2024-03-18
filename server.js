@@ -3,6 +3,7 @@ const fs = require('fs')
 
 const app = express()
 const router = express.Router()
+app.use('/', router)  // mount the router on the app
 
 // this endpoint
 const protocol = "http"
@@ -58,8 +59,6 @@ router.use((req, res, next) => {
             req.method,  // why isn't this recorded in res?
             res.statusCode,  // this doesn't work for some errors
             res.statusMessage,  // sometimes blank
-            res.json(),  // "[object Object]" again. Even `.json()` doesn't know it's JSON? 
-            JSON.stringify(res.json()),  // goddamn "[object Object]". Why doesn't `.json()` know it's JSON?
         ].join(' : '))
     /* 
     Don't be quick to log:
